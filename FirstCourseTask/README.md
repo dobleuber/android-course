@@ -1,4 +1,4 @@
-FirstCourseTask -> Android course
+FirstCourseTask
 =================================
 
 In this session we worked with activities and intents.
