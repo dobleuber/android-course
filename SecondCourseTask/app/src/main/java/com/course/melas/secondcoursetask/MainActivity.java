@@ -1,11 +1,12 @@
 package com.course.melas.secondcoursetask;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -31,10 +32,7 @@ public class MainActivity extends Activity implements UserDataDialogFragment.Dat
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+      return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
   public void getNameClick(View view) {
@@ -48,5 +46,18 @@ public class MainActivity extends Activity implements UserDataDialogFragment.Dat
     TextView lastNameTxt = (TextView) findViewById(R.id.lastNameTxt);
     firstNameTxt.setText(bundle.getString("firstName"));
     lastNameTxt.setText(bundle.getString("lastName"));
+    Button calDialogBtn = (Button) findViewById(R.id.calDialogBtn);
+    Button gotoSecondBtn = (Button) findViewById(R.id.gotoSecondBtn);
+    calDialogBtn.setVisibility(View.GONE);
+    gotoSecondBtn.setVisibility(View.VISIBLE);
+  }
+
+  public void gotoSecond(View view) {
+    Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
+    TextView firstNameTxt = (TextView) findViewById(R.id.firstNameTxt);
+    TextView lastNameTxt = (TextView) findViewById(R.id.lastNameTxt);
+    welcomeIntent.putExtra("firstName", firstNameTxt.getText().toString());
+    welcomeIntent.putExtra("lastName", lastNameTxt.getText().toString());
+    startActivity(welcomeIntent);
   }
 }
